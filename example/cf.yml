@@ -1,0 +1,8 @@
+---
+- name: cf playbook
+  hosts: cf
+  serial: 2
+  gather_facts: false
+
+  roles:
+  - name: cf
