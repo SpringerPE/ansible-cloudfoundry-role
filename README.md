@@ -7,12 +7,11 @@ security groups, quotas, users, organizations and spaces
 # Dependencies
 
 This role uses the Cloud Foundry modules included in the `library` folder.
-Those modules have one requirement: https://github.com/SpringerPE/python-cfconfigurator
-You can install all requirements for the modules by running *pip*:
-`pip install -r requirements.txt`
+Those modules have only one requirement: https://github.com/SpringerPE/python-cfconfigurator .
+You can install it by running *pip*: `pip install -r requirements.txt`
 
 
-# Usage and Configuration
+# Usage
 
 First of all, install the role using `ansible-galaxy`. The role is not available
 in https://galaxy.ansible.com/ because they do not support organizations. But,
