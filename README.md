@@ -113,10 +113,6 @@ Current available modules make possible to manage:
 They depend on https://github.com/SpringerPE/python-cfconfigurator ,
 just install it via pip.
 
-```
-pip install -r requirements.txt
-```
-
 For examples, have a look at `tests` folder.
 
 
