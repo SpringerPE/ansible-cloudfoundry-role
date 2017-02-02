@@ -59,7 +59,9 @@ api.test.cf.springer.com
 api.test.cf.springer.com
 
 [api.test.cf.springer.com:vars]
-cf_admin_user=pepe
+cf_admin_user=pepeCloud Foundry resource automation using Ansible
+
+Have a look at the file: https://github.com/SpringerPE/ansible-cloudfoundry/blob/master/inventory/group_vars/cf.yml to see how to define the resources: feature flags, domains, security groups, quotas, environment variables, users, organizations and spaces.
 cf_admin_password="password"
 cf_api="https://api.test.cf.springer.com"
 
@@ -71,15 +73,51 @@ cf_api="https://api.test.cf.springer.com"
 localhost ansible_connection=local ansible_become=false
 ```
 
-after setting up the variables defined in `defaults/main.yml` using
-`groups_vars` or `host_vars` features, run ansible:
+Now, have a look at the file `defaults/main.yml` to see how to define the
+resources: feature flags, domains, security groups, quotas, environment
+variables, users, organizations and spaces.
+
+You can manage different Cloud Foundry environments by using inventory files
+like this one: https://github.com/SpringerPE/ansible-cloudfoundry/blob/master/inventory/cf.ini
+It makes possible to define some common global configuration variables by splitting
+them in different files (Ansible superpower!)
+
+Once the CF credentials are defined in the inventory and the resources in the manifest,
+just run ansible:
 
 ```
-ansible-playbook -i test.ini  cf.yml
+ansible-playbook -i inventory/cf.ini cf.yml
 ```
 
 and done!
 
+
+## Components
+
+Inside the `library` folder there are a set of Ansible modules to manage Cloud
+Foundry configuration entities, not aimed to manage apps, routes, service
+brokers, etc.
+
+Current available modules make possible to manage:
+
+* **cf_config**: Environment variables, feature flags and default security groups.
+* **cf_domain**: Private (with owner/shared organizations) and shared domains
+* **cf_org**: Organizations (and user roles: user, manager, auditor and billing_manager)
+* **cf_space**: Spaces (and user roles: user, manager, auditor)
+* **cf_quota**: Organization and space Quotas
+* **cf_secgroup**: Security groups
+* **cf_secgroup_rule**: Security group rules
+* **cf_user**: Manage CF users via UAA
+* **cf_org_facts**: Get facts from a CF Org or Space
+
+They depend on https://github.com/SpringerPE/python-cfconfigurator ,
+just install it via pip.
+
+```
+pip install -r requirements.txt
+```
+
+For examples, have a look at `tests` folder.
 
 
 # Author
