@@ -158,7 +158,7 @@ class CF_Config(object):
         mode = True if state == "present" else False
         try:
             if config_type == "feature_flag":
-                if self.module.params['value'] is None:
+                if self.module.params['value'] is not None:
                     mode = self.module.boolean(self.module.params['value'])
                 result = self.set_flag(mode)
             elif config_type == "env_var":
