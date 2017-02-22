@@ -11,6 +11,8 @@
       email: "{{ item.email | default(omit) }}"
       given_name: "{{ item.given_name | default(omit) }}"
       family_name: "{{ item.family_name | default(omit) }}"
+      origin: "{{ item.origin | default(omit) }}"
+      external_id: "{{ item.external_id | default(omit) }}"
       admin_user: "{{ cf_admin_user }}"
       admin_password: "{{ cf_admin_password }}"
       api_url: "{{ cf_api }}"
