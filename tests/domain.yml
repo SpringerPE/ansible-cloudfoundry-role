@@ -1,6 +1,6 @@
 ---
 - name: cf_domain module examples
-  hosts: cfclient
+  hosts: cf
   gather_facts: false
   vars:
     cf_domain: "cf.springer-sbm.com"
@@ -12,6 +12,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: create shared domain testdomain.{{ cf_domain }} (again)
       cf_domain:
@@ -19,6 +20,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: delete shared domain testdomain.{{ cf_domain }}
       cf_domain:
@@ -27,6 +29,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: delete shared domain testdomain.{{ cf_domain }} (again)
       cf_domain:
@@ -35,6 +38,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: create shared domain ttestdomain.{{ cf_domain }}
       cf_domain:
@@ -43,6 +47,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
 # Private domains with Orgs
 
@@ -53,6 +58,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: create org test
       cf_org:
@@ -61,6 +67,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: create private domain ptestdomain.{{ cf_domain }} for test org
       cf_domain:
@@ -70,6 +77,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: share domain ptestdomain.{{ cf_domain }} owned by test org with test2 org
       cf_domain:
@@ -79,6 +87,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: share domain ptestdomain.{{ cf_domain }} owned by test org with test2 org (again)
       cf_domain:
@@ -88,6 +97,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: unshare domain ptestdomain.{{ cf_domain }} owned by test org with test2 org
       cf_domain:
@@ -98,6 +108,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: unshare domain ptestdomain.{{ cf_domain }} owned by test org with test2 org (again)
       cf_domain:
@@ -108,3 +119,5 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
+

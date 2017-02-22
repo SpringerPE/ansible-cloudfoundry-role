@@ -1,6 +1,6 @@
 ---
 - name: cf_space module examples
-  hosts: cfclient
+  hosts: cf
   gather_facts: false
 
   tasks:
@@ -11,6 +11,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: create space stest in test org (again)
       cf_space:
@@ -19,6 +20,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: delete space stest
       cf_space:
@@ -28,6 +30,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: delete space stest (again)
       cf_space:
@@ -37,6 +40,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: create space test in test org
       cf_space:
@@ -45,6 +49,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
 # Warning! In order to add an user as [manager, auditor]
 # first they have to be added as a user!, otherwise the error:
@@ -60,6 +65,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: create org test2
       cf_org:
@@ -68,6 +74,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: add user bob to stest2 in test2 org
       cf_space:
@@ -78,6 +85,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: promote bob as manager in the test2 org space stest2
       cf_space:
@@ -88,6 +96,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: demote bob as user in the test2 org space stest2
       cf_space:
@@ -99,6 +108,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: delete org test2 with force (there are spaces there!)
       cf_org:
@@ -109,6 +119,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: delete user bob
       cf_user:
@@ -117,3 +128,5 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
+

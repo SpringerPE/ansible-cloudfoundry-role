@@ -1,6 +1,6 @@
 ---
 - name: cf_config module examples
-  hosts: cfclient
+  hosts: cf
   gather_facts: false
 
   tasks:
@@ -12,6 +12,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: enable user_org_creation (again)
       cf_config:
@@ -21,6 +22,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: disable user_org_creation
       cf_config:
@@ -30,6 +32,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: define env variable JRIGUERA_HOME=Rotterdam
       cf_config:
@@ -39,6 +42,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: define env variable JRIGUERA_HOME=Rotterdam (again)
       cf_config:
@@ -48,6 +52,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: define env variable JRIGUERA_HOME=Dordrecht
       cf_config:
@@ -57,6 +62,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: delete env variable JRIGUERA_HOME
       cf_config:
@@ -67,6 +73,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
 # Default Security groups
 
@@ -76,6 +83,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: set test-secgroup as default for staging
       cf_config:
@@ -85,6 +93,7 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
 
     - name: delete test-secgroup
       cf_secgroup:
@@ -93,3 +102,5 @@
         admin_user: "{{ cf_admin_user }}"
         admin_password: "{{ cf_admin_password }}"
         api_url: "{{ cf_api }}"
+      delegate_to: "{{ groups.client[0] }}"
+
