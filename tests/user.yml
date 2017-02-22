@@ -4,6 +4,34 @@
   gather_facts: false
 
   tasks:
+
+  - name: create org test
+    cf_org:
+      name: "test"
+      quota: "default"
+      admin_user: "{{ cf_admin_user }}"
+      admin_password: "{{ cf_admin_password }}"
+      api_url: "{{ cf_api }}"
+    delegate_to: "{{ groups.client[0] }}"
+
+  - name: create space test in test org
+    cf_space:
+      name: "test"
+      organization: "test"
+      admin_user: "{{ cf_admin_user }}"
+      admin_password: "{{ cf_admin_password }}"
+      api_url: "{{ cf_api }}"
+    delegate_to: "{{ groups.client[0] }}"
+
+  - name: create space test2 in test org
+    cf_space:
+      name: "test2"
+      organization: "test"
+      admin_user: "{{ cf_admin_user }}"
+      admin_password: "{{ cf_admin_password }}"
+      api_url: "{{ cf_api }}"
+    delegate_to: "{{ groups.client[0] }}"
+
   - name: create user bob
     cf_user:
       name: "bob"
@@ -27,6 +55,34 @@
       family_name: "SpongeBob"
       default_organization: test
       default_space: test
+      admin_user: "{{ cf_admin_user }}"
+      admin_password: "{{ cf_admin_password }}"
+      api_url: "{{ cf_api }}"
+    delegate_to: "{{ groups.client[0] }}"
+
+  - name: modify given_name of user bob
+    cf_user:
+      name: "bob"
+      password: "hola"
+      email: "bob@hola.com"
+      given_name: "Bob2"
+      family_name: "SpongeBob"
+      default_organization: test
+      default_space: test
+      admin_user: "{{ cf_admin_user }}"
+      admin_password: "{{ cf_admin_password }}"
+      api_url: "{{ cf_api }}"
+    delegate_to: "{{ groups.client[0] }}"
+
+  - name: modify space of user bob
+    cf_user:
+      name: "bob"
+      password: "hola"
+      email: "bob@hola.com"
+      given_name: "Bob2"
+      family_name: "SpongeBob"
+      default_organization: test
+      default_space: test2
       admin_user: "{{ cf_admin_user }}"
       admin_password: "{{ cf_admin_password }}"
       api_url: "{{ cf_api }}"
@@ -58,6 +114,16 @@
     cf_user:
       name: "trump@hola.com"
       state: absent
+      admin_user: "{{ cf_admin_user }}"
+      admin_password: "{{ cf_admin_password }}"
+      api_url: "{{ cf_api }}"
+    delegate_to: "{{ groups.client[0] }}"
+
+  - name: delete org test
+    cf_org:
+      name: "test"
+      state: absent
+      force: yes
       admin_user: "{{ cf_admin_user }}"
       admin_password: "{{ cf_admin_password }}"
       api_url: "{{ cf_api }}"

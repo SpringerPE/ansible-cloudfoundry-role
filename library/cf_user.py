@@ -197,9 +197,27 @@ class CF_User(object):
             except CFException as e:
                 msg = "Cannot create user %s: %s" % (self.name, str(e))
                 self.module.fail_json(msg=msg)
-            msg = "CF user %s updated: %s" % (self.name, changed_user)
+            changed = changed or changed_user
+        else:
+            if not changed:
+                user = self.cf.uaa.user_get(user_id)
+                # We are not checking the password!. Its ok :-)
+                changed = not (
+                    self.module.params['family_name'] == user['name']['familyName'] and
+                    self.module.params['given_name'] == user['name']['givenName'] and
+                    self.module.params['active'] == user['active'] and
+                    self.module.params['origin'] == user['origin']
+                )
+                if self.module.params['external_id']:
+                    if self.module.params['external_id'] != user['externalId']:
+                        changed = True
+                email_list = [e['value'] for e in user['emails']]
+                if self.module.params['email']:
+                    if self.module.params['email'] not in email_list:
+                        changed_user = True
+        msg = "CF user %s updated: %s" % (self.name, changed)
         result = {
-            'changed': changed or changed_user,
+            'changed': changed,
             'msg': msg,
             'data': user
         }
