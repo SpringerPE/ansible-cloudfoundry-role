@@ -70,8 +70,8 @@ cf_running_environment_variables:
 # Parameters:
 #    - name
 #      [state =present {present, absent}]
-#      [context =null {running, staging}]
-#      [context_state =present {present, absent}]
+#      [running_default =true {true, false}]
+#      [staging_default =true {true, false}]
 #      rules:
 #        - name
 #          [protocol =all {tcp, icmp, udp, all}]
@@ -87,6 +87,8 @@ cf_running_environment_variables:
 #
 # https://docs.cloudfoundry.org/adminguide/app-sec-groups.html
 #
+# Security groups can be defined for staging, for running or for both.
+#
 # These security groups are not attached to a space, but they can be referenced
 # by name in each space. 'code' and 'type' are only valid when protocol is
 # 'icmp'. 'log' is to tell the CF logger to trace the packages which match the
@@ -101,17 +103,16 @@ cf_running_environment_variables:
 # and remove the state or set it up to 'present'
 
 cf_security_groups:
-  - name: sec1
+  - name: sec-running-staging
     state: present
-    context: running
-    context_state: present
     rules:
     - name: "allow-proxy"
       protocol: tcp
       destination: "10.20.0.1/0"
       ports: "8080"
-  - name: sec2
+  - name: sec-staging
     state: present
+    running_default: false
     rules:
     - name: "allow-proxy2"
       protocol: tcp

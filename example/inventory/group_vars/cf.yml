@@ -62,8 +62,8 @@ cf_shared_domains: []
 # Parameters:
 #    - name
 #      [state =present {present, absent}]
-#      [context =null {running, staging}]
-#      [context_state =present {present, absent}]
+#      [running_default =true {true, false}]
+#      [staging_default =true {true, false}]
 #      rules:
 #        - name
 #          [protocol =all {tcp, icmp, udp, all}]
@@ -78,6 +78,8 @@ cf_shared_domains: []
 # network access to.
 #
 # https://docs.cloudfoundry.org/adminguide/app-sec-groups.html
+#
+# Security groups can be defined for staging, for running or for both.
 #
 # These security groups are not attached to a space, but they can be referenced
 # by name in each space. 'code' and 'type' are only valid when protocol is
