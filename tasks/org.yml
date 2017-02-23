@@ -10,7 +10,7 @@
     _organization_managers: "{{ cf_organization.managers | default([]) }}"
     _organization_auditors: "{{ cf_organization.auditors | default([]) }}"
     _organization_billing_managers: "{{ cf_organization.billing_managers | default([]) }}"
-    _organization_domains: "{{ cf_organization.domains | default([]) }}"
+    _organization_domains: "{{ cf_organization.private_domains | default([]) }}"
 
 # Clean input variables
 - name: "Org - Facts"

@@ -146,10 +146,7 @@ cf_users: []
 #      [state =present {present, absent}]
 #      [force =false]
 #      [quota =default]
-#      [domains_private =[]]
-#        - name
-#          [state =present {present, absent}]
-#      [domains_borrowed =[]]
+#      [private_domains =[]]
 #        - name
 #          [state =present {present, absent}]
 #      [users =[]]
