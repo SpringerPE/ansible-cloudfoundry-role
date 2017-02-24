@@ -203,18 +203,26 @@ class CF_User(object):
                 user = self.cf.uaa.user_get(user_id)
                 # We are not checking the password!. Its ok :-)
                 changed = not (
-                    self.module.params['family_name'] == user['name']['familyName'] and
-                    self.module.params['given_name'] == user['name']['givenName'] and
                     self.module.params['active'] == user['active'] and
                     self.module.params['origin'] == user['origin']
                 )
+                # Users should have user['name']['familyName'] and
+                # user['name']['givenName'] but there are some special cases
+                # (admin, doppler, etc) without those fields
+                if 'name' in user:
+                    if 'familyName' in user['name']:
+                        if self.module.params['family_name'] != user['name']['familyName']:
+                            changed = True
+                    if 'givenName' in user['name']:
+                        if self.module.params['given_name'] != user['name']['givenName']:
+                            changed = True
                 if self.module.params['external_id']:
                     if self.module.params['external_id'] != user['externalId']:
                         changed = True
                 email_list = [e['value'] for e in user['emails']]
                 if self.module.params['email']:
                     if self.module.params['email'] not in email_list:
-                        changed_user = True
+                        changed = True
         msg = "CF user %s updated: %s" % (self.name, changed)
         result = {
             'changed': changed,
