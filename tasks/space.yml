@@ -52,6 +52,7 @@
       user_role: developer
       user_state: "{{ item.state | default('present') }}"
       name: "{{ _space_name }}"
+      allow_ssh: "{{ _space_allow_ssh }}"
       organization: "{{ _space_organization_name }}"
       admin_user: "{{ cf_admin_user }}"
       admin_password: "{{ cf_admin_password }}"
@@ -65,6 +66,7 @@
       user_role: manager
       user_state: "{{ item.state | default('present') }}"
       name: "{{ _space_name }}"
+      allow_ssh: "{{ _space_allow_ssh }}"
       organization: "{{ _space_organization_name }}"
       admin_user: "{{ cf_admin_user }}"
       admin_password: "{{ cf_admin_password }}"
@@ -78,6 +80,7 @@
       user_role: auditor
       user_state: "{{ item.state | default('present') }}"
       name: "{{ _space_name }}"
+      allow_ssh: "{{ _space_allow_ssh }}"
       organization: "{{ _space_organization_name }}"
       admin_user: "{{ cf_admin_user }}"
       admin_password: "{{ cf_admin_password }}"
